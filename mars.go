@@ -5,22 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/raduq/mars2/handler"
 )
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/rest/mars/{command}", NavHandler).Methods("GET")
+	r.HandleFunc("/rest/mars/{command}", handler.NavHandler).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":8000", r))
-}
-
-type planet struct {
-	MaxX int
-	MaxY int
-}
-
-type robot struct {
-	AtX int
-	AtY int
-	Ori string
 }

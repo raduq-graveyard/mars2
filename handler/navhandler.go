@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"fmt"
@@ -9,12 +9,23 @@ import (
 	"github.com/gorilla/mux"
 )
 
+type planet struct {
+	MaxX int
+	MaxY int
+}
+
+type robot struct {
+	AtX int
+	AtY int
+	Ori string
+}
+
 // NavHandler and stuff
 func NavHandler(w http.ResponseWriter, r *http.Request) {
 	commands := commands(r)
 	planet := planet{5, 5}
 	robot := robot{0, 0, "N"}
-	pos, err := Walk(planet, robot, commands)
+	pos, err := Walker(planet, robot, commands)
 
 	if err != nil {
 		log.Fatal(err)
